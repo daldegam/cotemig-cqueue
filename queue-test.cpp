@@ -9,6 +9,31 @@ using namespace Cotemig::Queue;
  * g++ CQueue.cpp queue-test.cpp && ./a.out
  */
 
+ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue list)
+{
+    int index = list.GetBeginPosition();
+
+    stream << "[";
+    for(int i = 0; i < list.Size(); i++)
+    {
+        stream << list[(index + i) % list.MaxSize()];
+        
+        if(i < list.Size() - 1)
+        {
+            stream << ",";
+        }
+    }
+    stream << "]" << endl;
+    return stream;
+}
+
+CQueue operator+(float item, CQueue list)
+{
+    CQueue newList(list.MaxSize());
+    newList = list + item;
+    return newList;
+}
+
 void common_tests()
 {
     CQueue myQueue(5);
@@ -38,31 +63,9 @@ void common_tests()
     
     myQueue.Remove();
     myQueue.Insert(8.0f);
-}
 
-ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue list)
-{
-    stream << "[";
-    for(int i = 0; i < list.Size(); i++)
-    {
-        stream << list[i];
-        
-        if(i < list.Size() - 1)
-        {
-            stream << ",";
-        }
-    }
-    stream << "]" << endl;
-    return stream;
+    cout << myQueue;
 }
-
-CQueue operator+(float item, CQueue list)
-{
-    CQueue newList(list.MaxSize());
-    newList = list + item;
-    return newList;
-}
-
 
 void operator_plus_queue_tests() 
 {
@@ -164,12 +167,12 @@ void operator_equals_and_notequals_queue_tests()
 
 int main()
 {
-    //common_tests();   
+    common_tests();   
 
     //operator_plus_queue_tests();
     //operator_plus_float_tests();
     //operator_plusequal_queue_tests();
-    operator_equals_and_notequals_queue_tests();
+    //operator_equals_and_notequals_queue_tests();
 
     return 0;
 }

@@ -22,6 +22,11 @@ Cotemig::Queue::CQueue::~CQueue()
     //delete [] p_fItems;
 }
 
+int Cotemig::Queue::CQueue::GetBeginPosition()
+{
+    return m_iBegin;
+}
+
 void Cotemig::Queue::CQueue::Insert(float item)
 {
     if(IsFull())

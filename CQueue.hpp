@@ -15,6 +15,8 @@ namespace Cotemig
                 CQueue(int size);
                 ~CQueue();
 
+                int GetBeginPosition();
+
                 void Insert(float item);
                 float Remove();
                 bool IsEmpty();
