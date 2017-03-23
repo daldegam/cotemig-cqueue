@@ -80,35 +80,14 @@ int Cotemig::Queue::CQueue::MaxSize()
     return m_iMaxSize;
 }
 
-int main()
+Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue list)
 {
-    CQueue myQueue(5);
+    Cotemig::Queue::CQueue newList(this->MaxSize());
 
-    cout << "Queue IsEmpty: " << myQueue.IsEmpty() << endl;
+    for(int i = 0, s = this->Size(); i < s; i++)
+    {
+        newList.Insert(this->Remove() + list.Remove());
+    }
 
-    myQueue.Insert(1.0f);
-    myQueue.Insert(2.0f);
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-    myQueue.Insert(3.0f);
-    myQueue.Insert(4.0f);
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-    myQueue.Remove();
-
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-    myQueue.Insert(5.0f);
-    myQueue.Insert(6.0f);
-
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-    cout << "Queue IsFull: " << myQueue.IsFull() << endl;
-
-    myQueue.Remove();
-    myQueue.Insert(7.0f);
-    
-    myQueue.Remove();
-    myQueue.Insert(8.0f);
-    
-    return 0;
+    return newList;
 }

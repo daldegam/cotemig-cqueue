@@ -21,6 +21,8 @@ namespace Cotemig
                 bool IsFull();
                 int Size();
                 int MaxSize();
+
+                CQueue operator+(CQueue list);
         };
     }
 }
