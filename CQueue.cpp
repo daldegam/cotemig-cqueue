@@ -31,12 +31,14 @@ void Cotemig::Queue::CQueue::Insert(float item)
         return;
     }
 
+    int index = ((m_iEnd++) % m_iMaxSize);
+
     if(m_bDebug)
     {
-        cout << "Insert item (" << item << ") into Queue" << endl;
+        cout << "Insert item[" << index << "](" << item << ") into Queue" << endl;
     }
 
-    p_fItems[m_iEnd++] = item;
+    p_fItems[index] = item;
 }
 
 float Cotemig::Queue::CQueue::Remove()
@@ -47,10 +49,12 @@ float Cotemig::Queue::CQueue::Remove()
         return 0;
     }
 
-    float value = p_fItems[m_iBegin++];
+    int index = ((m_iBegin++) % m_iMaxSize);
+
+    float value = p_fItems[index];
     if(m_bDebug)
     {
-        cout << "Remove item (" << value << ") from Queue" << endl;
+        cout << "Remove item[" << index << "](" << value << ") from Queue" << endl;
     }
     
     return value;
@@ -78,35 +82,33 @@ int Cotemig::Queue::CQueue::MaxSize()
 
 int main()
 {
-    CQueue myQueue(10);
+    CQueue myQueue(5);
 
     cout << "Queue IsEmpty: " << myQueue.IsEmpty() << endl;
 
-    for (int a = 0; a < 10; a++)
-    {
-        myQueue.Insert(a);
-    }
+    myQueue.Insert(1.0f);
+    myQueue.Insert(2.0f);
+    cout << "Current Queue Size: " << myQueue.Size() << endl;
 
+    myQueue.Insert(3.0f);
+    myQueue.Insert(4.0f);
+    cout << "Current Queue Size: " << myQueue.Size() << endl;
+
+    myQueue.Remove();
+
+    cout << "Current Queue Size: " << myQueue.Size() << endl;
+
+    myQueue.Insert(5.0f);
+    myQueue.Insert(6.0f);
+
+    cout << "Current Queue Size: " << myQueue.Size() << endl;
     cout << "Queue IsFull: " << myQueue.IsFull() << endl;
 
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-    for (int a = 0; a < 3; a++)
-    {
-        cout << "\tReturned value: " << myQueue.Remove() << endl;
-    }
-
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-    for (int a = 0; a < 2; a++)
-    {
-        cout << "\tReturned value: " << myQueue.Remove() << endl;
-    }
-
-    cout << "Current Queue Size: " << myQueue.Size() << endl;
-
-
-    cout << "Queue IsEmpty: " << myQueue.IsEmpty() << endl;
-
+    myQueue.Remove();
+    myQueue.Insert(7.0f);
+    
+    myQueue.Remove();
+    myQueue.Insert(8.0f);
+    
     return 0;
 }
