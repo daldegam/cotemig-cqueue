@@ -91,6 +91,40 @@ Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue 
     return newList;
 }
 
+Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(float item)
+{
+    CQueue newList(this->MaxSize());
+
+    for(int i = 0, s = this->Size(); i < s; i++)
+    {
+        newList.Insert(p_fItems[i] + item);
+    }
+
+    return newList;
+}
+
+
+Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(Cotemig::Queue::CQueue list)
+{
+    for(int i = 0, s = this->Size(); i < s; i++)
+    {
+        p_fItems[i] += list[i];
+    }
+
+    return *this;
+}
+
+Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(float item)
+{
+    for(int i = 0, s = this->Size(); i < s; i++)
+    {
+        p_fItems[i] += item;
+    }
+
+    return *this;
+}
+
+
 float Cotemig::Queue::CQueue::operator[](int index) 
 {
     if(index < 0 || index > m_iMaxSize)
@@ -104,3 +138,28 @@ float Cotemig::Queue::CQueue::operator[](int index)
 
     return p_fItems[index];
 }
+
+bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue list)
+{
+    if (this->MaxSize() != list.MaxSize())
+    {
+        return true;
+    }
+
+    for (int i = 0; i < this->MaxSize(); i++)
+    {
+        if (p_fItems[i] != list[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Cotemig::Queue::CQueue::operator!=(Cotemig::Queue::CQueue list)
+{
+    return !(*this == list);
+}
+
+
+

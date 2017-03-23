@@ -56,8 +56,15 @@ ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue list)
     return stream;
 }
 
+CQueue operator+(float item, CQueue list)
+{
+    CQueue newList(list.MaxSize());
+    newList = list + item;
+    return newList;
+}
 
-void operator_plus_tests() 
+
+void operator_plus_queue_tests() 
 {
     CQueue q1(5);
     CQueue q2(5);
@@ -79,13 +86,90 @@ void operator_plus_tests()
     cout << q2;
     cout << qSum;
 
+    cout << q1;
+    cout << q2;
+}
+
+void operator_plus_float_tests() 
+{
+    CQueue q1(5);
+    q1.Insert(1.0f);
+    q1.Insert(2.0f);
+    q1.Insert(3.0f);
+
+    CQueue qSum(5);
+
+    cout << q1;
+    cout << qSum;
+
+    qSum = q1 + 2.5f;
+
+
+    cout << q1;
+    cout << qSum;
+
+    qSum = 1.5f + q1;
+
+    cout << q1;
+    cout << qSum;
+}
+
+void operator_plusequal_queue_tests() 
+{
+    CQueue q1(5);
+    CQueue q2(5);
+
+    q1.Insert(1.0f);
+    q2.Insert(1.0f);
+
+    q1.Insert(2.0f);
+    q2.Insert(2.0f);
+
+    q1.Insert(3.0f);
+    q2.Insert(3.0f);
+
+    cout << q1;
+    cout << q2;
+
+    q1 += q2;
+
+    cout << q1;
+    cout << q2;
+
+    q1 += 10.f;
+
+    cout << q1;
+    cout << q2;
+}
+
+void operator_equals_and_notequals_queue_tests() 
+{
+    CQueue q1(5);
+    CQueue q2(5);
+
+    q1.Insert(1.0f);
+    q2.Insert(1.0f);
+
+    q1.Insert(2.0f);
+    q2.Insert(2.0f);
+
+    q1.Insert(3.0f);
+    q2.Insert(3.0f);
+
+
+    cout << "q1 == q2 result: " << (q1 == q2) << endl;
+
+    cout << "q1 != q2 result: " << (q1 != q2) << endl;
 }
 
 int main()
 {
     //common_tests();   
 
-    operator_plus_tests();
+    //operator_plus_queue_tests();
+    //operator_plus_float_tests();
+    //operator_plusequal_queue_tests();
+    operator_equals_and_notequals_queue_tests();
 
     return 0;
 }
