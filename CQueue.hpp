@@ -23,6 +23,11 @@ namespace Cotemig
                 int MaxSize();
 
                 CQueue operator+(CQueue list);
+
+                float operator[](int index);
+
+                //friend ostream& operator<<(ostream& stream, CQueue list);
         };
     }
 }
+

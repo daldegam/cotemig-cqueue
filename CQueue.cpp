@@ -4,7 +4,6 @@
 using namespace std;
 
 #include "CQueue.hpp"
-
 using namespace Cotemig::Queue;
 
 Cotemig::Queue::CQueue::CQueue(int size)
@@ -20,7 +19,7 @@ Cotemig::Queue::CQueue::CQueue(int size)
 
 Cotemig::Queue::CQueue::~CQueue()
 {
-    delete [] p_fItems;
+    //delete [] p_fItems;
 }
 
 void Cotemig::Queue::CQueue::Insert(float item)
@@ -82,12 +81,26 @@ int Cotemig::Queue::CQueue::MaxSize()
 
 Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue list)
 {
-    Cotemig::Queue::CQueue newList(this->MaxSize());
+    CQueue newList(this->MaxSize());
 
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newList.Insert(this->Remove() + list.Remove());
+        newList.Insert(p_fItems[i] + list[i]);
     }
 
     return newList;
+}
+
+float Cotemig::Queue::CQueue::operator[](int index) 
+{
+    if(index < 0 || index > m_iMaxSize)
+    {
+        if(m_bDebug)
+        {
+            cout << "Error, index[" << index << "] mismatch" << endl;
+        }
+        return 0;
+    }
+
+    return p_fItems[index];
 }

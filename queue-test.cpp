@@ -40,6 +40,23 @@ void common_tests()
     myQueue.Insert(8.0f);
 }
 
+ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue list)
+{
+    stream << "[";
+    for(int i = 0; i < list.Size(); i++)
+    {
+        stream << list[i];
+        
+        if(i < list.Size() - 1)
+        {
+            stream << ",";
+        }
+    }
+    stream << "]" << endl;
+    return stream;
+}
+
+
 void operator_plus_tests() 
 {
     CQueue q1(5);
@@ -54,7 +71,14 @@ void operator_plus_tests()
     q1.Insert(3.0f);
     q2.Insert(3.0f);
 
-    CQueue qSum = q1 + q2;
+    CQueue qSum(5);
+
+    qSum = q1 + q2;
+
+    cout << q1;
+    cout << q2;
+    cout << qSum;
+
 }
 
 int main()
