@@ -194,5 +194,8 @@ int main()
 
     operator_doubleless_tests();
 
+
+	getchar();
+
     return 0;
 }
