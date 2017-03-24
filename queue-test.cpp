@@ -165,14 +165,34 @@ void operator_equals_and_notequals_queue_tests()
     cout << "q1 != q2 result: " << (q1 != q2) << endl;
 }
 
+void operator_doubleless_tests()
+{
+    CQueue q1(5);
+    q1 << 1.0f;
+    q1 << 2.0f;
+    q1 << 3.0f;
+       
+    cout << q1;
+
+    float t;
+
+    q1 >> t;
+
+    cout << "t = " << t << endl;
+
+    cout << q1;
+}
+
 int main()
 {
-    common_tests();   
+    //common_tests();   
 
     //operator_plus_queue_tests();
     //operator_plus_float_tests();
     //operator_plusequal_queue_tests();
     //operator_equals_and_notequals_queue_tests();
+
+    operator_doubleless_tests();
 
     return 0;
 }

@@ -166,5 +166,13 @@ bool Cotemig::Queue::CQueue::operator!=(Cotemig::Queue::CQueue list)
     return !(*this == list);
 }
 
+void Cotemig::Queue::CQueue::operator<<(float item)
+{
+    this->Insert(item);
+}
 
+void Cotemig::Queue::CQueue::operator>>(float& item)
+{
+    item = this->Remove();
+}
 

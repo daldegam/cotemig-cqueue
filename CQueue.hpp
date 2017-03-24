@@ -35,6 +35,9 @@ namespace Cotemig
                 bool operator==(CQueue list);
                 bool operator!=(CQueue list);
 
+                void operator<<(float item);
+                void operator>>(float& item);
+
                 //friend CQueue operator+(float item, CQueue list);
                 //friend ostream& operator<<(ostream& stream, CQueue list);
         };
