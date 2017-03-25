@@ -31,7 +31,7 @@ void Cotemig::Queue::CQueue::Insert(float item)
 {
     if(IsFull())
     {
-        cout << "Erro, this queue is full" << endl;
+        cout << "Error, this queue is full" << endl;
         return;
     }
 
@@ -84,13 +84,13 @@ int Cotemig::Queue::CQueue::MaxSize()
     return m_iMaxSize;
 }
 
-Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue list)
+Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue queue)
 {
     CQueue newList(this->MaxSize());
 
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newList.Insert(p_fItems[i] + list[i]);
+        newList.Insert(p_fItems[i] + queue[i]);
     }
 
     return newList;
@@ -109,11 +109,11 @@ Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(float item)
 }
 
 
-Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(Cotemig::Queue::CQueue list)
+Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(Cotemig::Queue::CQueue queue)
 {
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        p_fItems[i] += list[i];
+        p_fItems[i] += queue[i];
     }
 
     return *this;
@@ -144,16 +144,16 @@ float Cotemig::Queue::CQueue::operator[](int index)
     return p_fItems[index];
 }
 
-bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue list)
+bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue queue)
 {
-    if (this->MaxSize() != list.MaxSize())
+    if (this->MaxSize() != queue.MaxSize())
     {
         return true;
     }
 
     for (int i = 0; i < this->MaxSize(); i++)
     {
-        if (p_fItems[i] != list[i])
+        if (p_fItems[i] != queue[i])
         {
             return false;
         }
@@ -161,9 +161,9 @@ bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue list)
     return true;
 }
 
-bool Cotemig::Queue::CQueue::operator!=(Cotemig::Queue::CQueue list)
+bool Cotemig::Queue::CQueue::operator!=(Cotemig::Queue::CQueue queue)
 {
-    return !(*this == list);
+    return !(*this == queue);
 }
 
 void Cotemig::Queue::CQueue::operator<<(float item)
