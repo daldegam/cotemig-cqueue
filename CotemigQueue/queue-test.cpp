@@ -9,29 +9,29 @@ using namespace Cotemig::Queue;
  * g++ CQueue.cpp queue-test.cpp && ./a.out
  */
 
-ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue list)
+ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue queue)
 {
-    int index = list.GetBeginPosition();
+	int index = queue.GetBeginPosition();
 
-    stream << "[";
-    for(int i = 0; i < list.Size(); i++)
-    {
-        stream << list[(index + i) % list.MaxSize()];
-        
-        if(i < list.Size() - 1)
-        {
-            stream << ",";
-        }
-    }
-    stream << "]" << endl;
-    return stream;
+	stream << "[";
+	for (int i = 0; i < queue.Size(); i++)
+	{
+		stream << queue[(index + i) % queue.MaxSize()];
+
+		if (i < queue.Size() - 1)
+		{
+			stream << ",";
+		}
+	}
+	stream << "]" << endl;
+	return stream;
 }
 
-CQueue operator+(float item, CQueue list)
+CQueue operator+(float item, CQueue queue)
 {
-    CQueue newList(list.MaxSize());
-    newList = list + item;
-    return newList;
+	CQueue newQueue(queue.MaxSize());
+	newQueue = queue + item;
+	return newQueue;
 }
 
 void common_tests()

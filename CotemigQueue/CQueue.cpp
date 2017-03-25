@@ -86,26 +86,26 @@ int Cotemig::Queue::CQueue::MaxSize()
 
 Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue queue)
 {
-    CQueue newList(this->MaxSize());
+    CQueue newQueue(this->MaxSize());
 
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newList.Insert(p_fItems[i] + queue[i]);
+        newQueue.Insert(p_fItems[i] + queue[i]);
     }
 
-    return newList;
+    return newQueue;
 }
 
 Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(float item)
 {
-    CQueue newList(this->MaxSize());
+    CQueue newQueue(this->MaxSize());
 
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newList.Insert(p_fItems[i] + item);
+        newQueue.Insert(p_fItems[i] + item);
     }
 
-    return newList;
+    return newQueue;
 }
 
 
@@ -175,4 +175,3 @@ void Cotemig::Queue::CQueue::operator>>(float& item)
 {
     item = this->Remove();
 }
-
