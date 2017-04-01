@@ -19,7 +19,7 @@ Cotemig::Queue::CQueue::CQueue(int size)
 
 Cotemig::Queue::CQueue::~CQueue()
 {
-    //delete [] p_fItems;
+    // delete [] p_fItems;
 }
 
 int Cotemig::Queue::CQueue::GetBeginPosition()

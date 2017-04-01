@@ -5,35 +5,6 @@ using namespace std;
 #include "CQueue.hpp"
 using namespace Cotemig::Queue;
 
-/**
- * g++ CQueue.cpp queue-test.cpp && ./a.out
- */
-
-ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue queue)
-{
-	int index = queue.GetBeginPosition();
-
-	stream << "[";
-	for (int i = 0; i < queue.Size(); i++)
-	{
-		stream << queue[(index + i) % queue.MaxSize()];
-
-		if (i < queue.Size() - 1)
-		{
-			stream << ",";
-		}
-	}
-	stream << "]" << endl;
-	return stream;
-}
-
-CQueue operator+(float item, CQueue queue)
-{
-	CQueue newQueue(queue.MaxSize());
-	newQueue = queue + item;
-	return newQueue;
-}
-
 void common_tests()
 {
     CQueue myQueue(5);
@@ -185,16 +156,18 @@ void operator_doubleless_tests()
 
 int main()
 {
-    //common_tests();   
+    common_tests();   
 
-    //operator_plus_queue_tests();
-    //operator_plus_float_tests();
-    //operator_plusequal_queue_tests();
-    //operator_equals_and_notequals_queue_tests();
+    operator_plus_queue_tests();
+    
+	operator_plus_float_tests();
+    
+	operator_plusequal_queue_tests();
+    
+	operator_equals_and_notequals_queue_tests();
 
     operator_doubleless_tests();
-
-
+	
 	getchar();
 
     return 0;

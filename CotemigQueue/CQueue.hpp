@@ -51,7 +51,7 @@ namespace Cotemig
 				/*!
 				 * \brief	Destrutor da classe de fila
 				 */
-                ~CQueue();
+                virtual ~CQueue();
 
 				
 				/*!
@@ -188,7 +188,12 @@ namespace Cotemig
 				 *
 				 * \return	Nova fila somada
 				 */
-                //friend CQueue operator+(float item, CQueue queue);
+                friend CQueue operator+(float item, CQueue queue)
+				{
+					CQueue newQueue(queue.MaxSize());
+					newQueue = queue + item;
+					return newQueue;
+				}
 
 				/*!
 				 * \brief	Imprime a fila
@@ -198,7 +203,23 @@ namespace Cotemig
 				 *
 				 * \return	Impressão dos elementos da fila
 				 */
-                //friend ostream& operator<<(ostream& stream, CQueue queue);
+                friend ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue queue)
+				{
+					int index = queue.GetBeginPosition();
+
+					stream << "[";
+					for (int i = 0; i < queue.Size(); i++)
+					{
+						stream << queue[(index + i) % queue.MaxSize()];
+
+						if (i < queue.Size() - 1)
+						{
+							stream << ",";
+						}
+					}
+					stream << "]" << endl;
+					return stream;
+				}
         };
     }
 }
