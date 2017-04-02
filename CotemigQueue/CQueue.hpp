@@ -13,6 +13,14 @@ namespace Cotemig
         {
             private:
 				/*!
+				 * \brief	Marca o objeto CQueue como copia
+				 *
+				 * \note	Utilizado no destrutor da classe para liberar
+				 *			a memoria alocada para a fila
+				 */
+				bool m_bCopy;
+
+				/*!
 				 * \brief	Coloca a classe em modo debug (imprime mensagens de debug)
 				 */
                 int m_bDebug;
@@ -45,8 +53,8 @@ namespace Cotemig
 				 *
 				 * \param	size	Tamanho da fila
 				 */
-                CQueue(int size);
-
+				CQueue(int size);
+				CQueue(const CQueue &queue);
 				
 				/*!
 				 * \brief	Destrutor da classe de fila
@@ -203,7 +211,7 @@ namespace Cotemig
 				 *
 				 * \return	Impressão dos elementos da fila
 				 */
-                friend ostream& operator<<(ostream& stream, Cotemig::Queue::CQueue queue)
+                friend ostream& operator<<(ostream& stream, CQueue queue)
 				{
 					int index = queue.GetBeginPosition();
 

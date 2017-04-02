@@ -52,9 +52,8 @@ void operator_plus_queue_tests()
     q1.Insert(3.0f);
     q2.Insert(3.0f);
 
-    CQueue qSum(5);
-
-    qSum = q1 + q2;
+	CQueue qSum(5);
+	qSum = q1 + q2;
 
     cout << q1;
     cout << q2;
@@ -77,7 +76,6 @@ void operator_plus_float_tests()
     cout << qSum;
 
     qSum = q1 + 2.5f;
-
 
     cout << q1;
     cout << qSum;

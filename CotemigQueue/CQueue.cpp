@@ -6,8 +6,9 @@ using namespace std;
 #include "CQueue.hpp"
 using namespace Cotemig::Queue;
 
-Cotemig::Queue::CQueue::CQueue(int size)
+CQueue::CQueue(int size)
 {
+	m_bCopy = false;
     p_fItems = new float[size];
     memset(p_fItems, 0, size);
     m_iMaxSize = size;
@@ -17,17 +18,32 @@ Cotemig::Queue::CQueue::CQueue(int size)
     m_bDebug = true;
 }
 
-Cotemig::Queue::CQueue::~CQueue()
+CQueue::CQueue(const CQueue &queue)
 {
-    // delete [] p_fItems;
+	m_bCopy = true;
+	p_fItems = queue.p_fItems;
+
+	m_iMaxSize = queue.m_iMaxSize;
+	m_iBegin = queue.m_iBegin;
+	m_iEnd = queue.m_iEnd;
+
+	m_bDebug = queue.m_bDebug;
 }
 
-int Cotemig::Queue::CQueue::GetBeginPosition()
+CQueue::~CQueue()
+{
+	if (m_bCopy == false)
+	{
+		delete[] p_fItems;
+	}
+}
+
+int CQueue::GetBeginPosition()
 {
     return m_iBegin;
 }
 
-void Cotemig::Queue::CQueue::Insert(float item)
+void CQueue::Insert(float item)
 {
     if(IsFull())
     {
@@ -45,7 +61,7 @@ void Cotemig::Queue::CQueue::Insert(float item)
     p_fItems[index] = item;
 }
 
-float Cotemig::Queue::CQueue::Remove()
+float CQueue::Remove()
 {
     if(IsEmpty())
     {
@@ -64,27 +80,27 @@ float Cotemig::Queue::CQueue::Remove()
     return value;
 }
 
-bool Cotemig::Queue::CQueue::IsEmpty()
+bool CQueue::IsEmpty()
 {
     return Size() == 0;
 }
 
-bool Cotemig::Queue::CQueue::IsFull()
+bool CQueue::IsFull()
 {
     return Size() == m_iMaxSize;
 }
 
-int Cotemig::Queue::CQueue::Size()
+int CQueue::Size()
 {
     return m_iEnd - m_iBegin;
 }
 
-int Cotemig::Queue::CQueue::MaxSize()
+int CQueue::MaxSize()
 {
     return m_iMaxSize;
 }
 
-Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue queue)
+CQueue CQueue::operator+(CQueue queue)
 {
     CQueue newQueue(this->MaxSize());
 
@@ -96,7 +112,7 @@ Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(Cotemig::Queue::CQueue 
     return newQueue;
 }
 
-Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(float item)
+CQueue CQueue::operator+(float item)
 {
     CQueue newQueue(this->MaxSize());
 
@@ -108,8 +124,7 @@ Cotemig::Queue::CQueue Cotemig::Queue::CQueue::operator+(float item)
     return newQueue;
 }
 
-
-Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(Cotemig::Queue::CQueue queue)
+CQueue& CQueue::operator+=(CQueue queue)
 {
     for(int i = 0, s = this->Size(); i < s; i++)
     {
@@ -119,7 +134,7 @@ Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(Cotemig::Queue::CQueu
     return *this;
 }
 
-Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(float item)
+CQueue& CQueue::operator+=(float item)
 {
     for(int i = 0, s = this->Size(); i < s; i++)
     {
@@ -130,7 +145,7 @@ Cotemig::Queue::CQueue& Cotemig::Queue::CQueue::operator+=(float item)
 }
 
 
-float Cotemig::Queue::CQueue::operator[](int index) 
+float CQueue::operator[](int index) 
 {
     if(index < 0 || index > m_iMaxSize)
     {
@@ -144,7 +159,7 @@ float Cotemig::Queue::CQueue::operator[](int index)
     return p_fItems[index];
 }
 
-bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue queue)
+bool CQueue::operator==(CQueue queue)
 {
     if (this->MaxSize() != queue.MaxSize())
     {
@@ -161,17 +176,17 @@ bool Cotemig::Queue::CQueue::operator==(Cotemig::Queue::CQueue queue)
     return true;
 }
 
-bool Cotemig::Queue::CQueue::operator!=(Cotemig::Queue::CQueue queue)
+bool CQueue::operator!=(CQueue queue)
 {
     return !(*this == queue);
 }
 
-void Cotemig::Queue::CQueue::operator<<(float item)
+void CQueue::operator<<(float item)
 {
     this->Insert(item);
 }
 
-void Cotemig::Queue::CQueue::operator>>(float& item)
+void CQueue::operator>>(float& item)
 {
     item = this->Remove();
 }
