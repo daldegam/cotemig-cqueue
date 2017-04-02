@@ -8,7 +8,6 @@ using namespace Cotemig::Queue;
 
 CQueue::CQueue(int size)
 {
-	m_bCopy = false;
     p_fItems = new float[size];
     memset(p_fItems, 0, size);
     m_iMaxSize = size;
@@ -20,8 +19,8 @@ CQueue::CQueue(int size)
 
 CQueue::CQueue(const CQueue &queue)
 {
-	m_bCopy = true;
-	p_fItems = queue.p_fItems;
+	p_fItems = new float[queue.m_iMaxSize];
+	memcpy(p_fItems, queue.p_fItems, sizeof(float) * queue.m_iMaxSize);
 
 	m_iMaxSize = queue.m_iMaxSize;
 	m_iBegin = queue.m_iBegin;
@@ -30,12 +29,23 @@ CQueue::CQueue(const CQueue &queue)
 	m_bDebug = queue.m_bDebug;
 }
 
+CQueue& CQueue::operator=(const CQueue& queue)
+{
+	// Same code of copy constructor
+	p_fItems = new float[queue.m_iMaxSize];
+	memcpy(p_fItems, queue.p_fItems, sizeof(float) * queue.m_iMaxSize);
+
+	m_iMaxSize = queue.m_iMaxSize;
+	m_iBegin = queue.m_iBegin;
+	m_iEnd = queue.m_iEnd;
+
+	m_bDebug = queue.m_bDebug;
+	return *this;
+}
+
 CQueue::~CQueue()
 {
-	if (m_bCopy == false)
-	{
-		delete[] p_fItems;
-	}
+	delete[] p_fItems;
 }
 
 int CQueue::GetBeginPosition()

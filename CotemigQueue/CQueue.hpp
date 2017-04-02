@@ -13,14 +13,6 @@ namespace Cotemig
         {
             private:
 				/*!
-				 * \brief	Marca o objeto CQueue como copia
-				 *
-				 * \note	Utilizado no destrutor da classe para liberar
-				 *			a memoria alocada para a fila
-				 */
-				bool m_bCopy;
-
-				/*!
 				 * \brief	Coloca a classe em modo debug (imprime mensagens de debug)
 				 */
                 int m_bDebug;
@@ -54,13 +46,27 @@ namespace Cotemig
 				 * \param	size	Tamanho da fila
 				 */
 				CQueue(int size);
+
+				/*!
+				 * \brief	Construtor de cópia
+				 *
+				 * \param	queue	Fila a ser copiada
+				 */
 				CQueue(const CQueue &queue);
+
+				/*!
+				 * \brief	Operador de atribuição
+				 *
+				 * \param	queue	Fila a ser atribuida
+				 *
+				 * \return	Fila
+				 */
+				CQueue& operator=(const CQueue& queue);
 				
 				/*!
 				 * \brief	Destrutor da classe de fila
 				 */
                 virtual ~CQueue();
-
 				
 				/*!
 				 * \brief	Obtem a posição atual a ser lida na fila
