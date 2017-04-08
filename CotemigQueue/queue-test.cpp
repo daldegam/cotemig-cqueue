@@ -105,7 +105,13 @@ void operator_plusequal_queue_tests()
     CQueue q1(5);
     CQueue q2(5);
 
-    q1.Insert(1.0f);
+	q1.Insert(1.0f);
+	q1.Remove();
+
+	q1.Insert(1.0f);
+	q1.Remove();
+
+	q1.Insert(1.0f);
     q2.Insert(1.0f);
 
     q1.Insert(2.0f);

@@ -139,9 +139,11 @@ CQueue CQueue::operator+(float item)
 
 CQueue& CQueue::operator+=(CQueue queue)
 {
+	int indexBeginCurrentQueue = this->GetBeginPosition();
+	int indexBeginReceivedQueue = queue.GetBeginPosition();
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        p_fItems[i] += queue[i];
+		p_fItems[(indexBeginCurrentQueue++) % m_iMaxSize] += queue[(indexBeginReceivedQueue++) % m_iMaxSize];
     }
 
     return *this;
@@ -149,9 +151,10 @@ CQueue& CQueue::operator+=(CQueue queue)
 
 CQueue& CQueue::operator+=(float item)
 {
+	int indexBeginCurrentQueue = this->GetBeginPosition();
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        p_fItems[i] += item;
+		p_fItems[(indexBeginCurrentQueue++) % m_iMaxSize] += item;
     }
 
     return *this;
