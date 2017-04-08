@@ -114,9 +114,11 @@ CQueue CQueue::operator+(CQueue queue)
 {
     CQueue newQueue(this->MaxSize());
 
+	int indexBeginCurrentQueue = this->GetBeginPosition();
+	int indexBeginReceivedQueue = queue.GetBeginPosition();
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newQueue.Insert(p_fItems[i] + queue[i]);
+		newQueue.Insert(p_fItems[(indexBeginCurrentQueue++) % m_iMaxSize] + queue[(indexBeginReceivedQueue++) % m_iMaxSize]);
     }
 
     return newQueue;
@@ -126,9 +128,10 @@ CQueue CQueue::operator+(float item)
 {
     CQueue newQueue(this->MaxSize());
 
+	int indexBeginCurrentQueue = this->GetBeginPosition();
     for(int i = 0, s = this->Size(); i < s; i++)
     {
-        newQueue.Insert(p_fItems[i] + item);
+		newQueue.Insert(p_fItems[(indexBeginCurrentQueue++) % m_iMaxSize] + item);
     }
 
     return newQueue;

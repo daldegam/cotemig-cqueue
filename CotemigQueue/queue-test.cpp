@@ -43,8 +43,16 @@ void operator_plus_queue_tests()
     CQueue q1(5);
     CQueue q2(5);
 
-    q1.Insert(1.0f);
-    q2.Insert(1.0f);
+	q1.Insert(1.0f);
+	q1.Remove();  // Mudar a posição do valor de [0] para [1]
+
+	q1.Insert(1.0f);
+	q1.Remove();  // Mudar a posição do valor de [1] para [2]
+
+	// Vamos inserir na posição [2] da queue para verificar se a soma está correta
+	// No caso a soma deve ser iniciada de q1[2] + q2[0] e seguir normalmente
+	q1.Insert(1.0f);
+    q2.Insert(1.0f); 
 
     q1.Insert(2.0f);
     q2.Insert(2.0f);
@@ -65,8 +73,14 @@ void operator_plus_queue_tests()
 
 void operator_plus_float_tests() 
 {
-    CQueue q1(5);
-    q1.Insert(1.0f);
+	CQueue q1(5);
+	q1.Insert(1.0f);
+	q1.Remove();
+	
+	q1.Insert(1.0f);
+	q1.Remove();
+
+	q1.Insert(1.0f);
     q1.Insert(2.0f);
     q1.Insert(3.0f);
 
